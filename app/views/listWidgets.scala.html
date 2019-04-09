@@ -2,14 +2,7 @@
 
   @main("Get a token", obpApiHostname) {
 
-    @* Global errors are not tied to any particular form field *@
-    @if(form.hasErrors) {
-      @form.errors.map { error: FormError =>
-        <div>
-          @error.key: @error.message
-        </div>
-      }
-    }
+
   <div id="directLogin_token">
 
     <div style="color: white">
@@ -27,8 +20,18 @@
     <div style="color: white">
       <h1>Request DirectLogin Token</h1>
     </div>
-    <div style="margin-left: 300px;">
 
+    <div style="margin-left: 300px;">
+      @* Global errors are not tied to any particular form field *@
+      @if(form.hasErrors) {
+        <div class="row">
+        @form.errors.map { error: FormError =>
+          <div style="color: white" class="form-group">
+            @error.key: @error.message
+          </div>
+        }
+        </div>
+      }
       @helper.form(postUrl){
         @helper.CSRF.formField
         <div class="row">
